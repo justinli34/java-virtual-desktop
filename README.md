@@ -7,7 +7,7 @@ Players will ride a bike through levels, traversing sound waves and unlocking ne
 Songs can be added to playlists, which then turn into new levels. 
 The application will contain a number of pre-selected songs and players will be able to add new tracks by uploading local files.  
 
-With beautiful landscapes, smooth gameplay, and soothing music, *Wave Rider* is for anyone seeking relaxation in today's fast-paced world.
+With beautiful landscapes, smooth gameplay, and awesome music, *Wave Rider* is for anyone seeking relaxation in today's fast-paced world.
 
 ## Motivation
 
