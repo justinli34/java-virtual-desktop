@@ -2,10 +2,12 @@ package ui;
 
 import model.*;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Game {
@@ -90,7 +92,10 @@ public class Game {
         fiberSearch = new FiberSearch();
         home.addApplication(fiberSearch);
 
-        fiberSearch.addWebpage(new Webpage("Tony's Pizza",
-                Files.readString(Path.of("/Users/justinli/IdeaProjects/210project/src/main/ui/TonysPizzaText"))));
+        String sep = System.getProperty("file.separator");
+        File tonys = new File(System.getProperty("user.dir") + sep + "src" + sep + "main"
+                + sep + "resources" + sep + "TonysPizzaText");
+        fiberSearch.addWebpage(new Webpage("Tony's Pizza", Files.readString(Paths.get(tonys.getAbsolutePath()))));
+
     }
 }
