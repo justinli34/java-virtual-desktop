@@ -11,18 +11,16 @@ import java.util.Scanner;
 public class Game {
 
     private boolean systemRunning;
-    private LaunchPad launchPad;
     private Home home;
     private FiberSearch fiberSearch;
     private MusicPlayer musicPlayer;
     private Scanner scan;
 
     // MODIFIES: this
-    // EFFECTS: creates new game with new Launchpad, Home, Scanner, FiberSearch, and MusicPlayer.
+    // EFFECTS: creates new game with new Home, Scanner, FiberSearch, and MusicPlayer.
     //          runs game
     public Game() {
         systemRunning = true;
-        launchPad = new LaunchPad();
         home = new Home();
         scan = new Scanner(System.in);
         fiberSearch = new FiberSearch();

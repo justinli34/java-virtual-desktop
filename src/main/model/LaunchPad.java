@@ -4,7 +4,4 @@ package model;
 // Will update this later to allow for new games, loading previous games, etc.
 public class LaunchPad {
 
-    public LaunchPad() {
-
-    }
 }
