@@ -8,6 +8,7 @@ import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// The game. Contains all data relating to the game. Read README for a description of the game.
 public class Game {
 
     private boolean systemRunning;

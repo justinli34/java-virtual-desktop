@@ -29,6 +29,16 @@ public class WebpageTest {
     }
 
     @Test
+    public void testGetTextAfter10Visits() {
+        page.setNumVisits(11);
+        try {
+            assertEquals("Page could not be reached", page.getText());
+        } catch (IOException e) {
+            fail("Threw unexpected IOException");
+        }
+    }
+
+    @Test
     public void testGetName() {
         assertEquals("Apple", page.getName());
     }

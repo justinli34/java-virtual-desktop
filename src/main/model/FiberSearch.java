@@ -26,7 +26,13 @@ public class FiberSearch extends Application {
         webpages.add(p);
     }
 
+    // EFFECTS: returns webpages with numVisits <= 12. removes webpages with more than 12 visits.
     public ArrayList<Webpage> getWebpages() {
+        for (Webpage w : webpages) {
+            if (w.getNumVisits() > 12) {
+                webpages.remove(w);
+            }
+        }
         return webpages;
     }
 }
