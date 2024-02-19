@@ -56,6 +56,10 @@ public class MusicPlayerTest {
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
+    }
 
+    @Test
+    public void testIsPlaying() {
+        assertFalse(musicPlayer.isPlaying());
     }
 }

@@ -27,7 +27,8 @@ This game is inspired by games like _Hypnospace Outlaw_, _Citizen Sleeper_, and 
 - As a user, I want to be able to enter and exit ArkNet.
 - As a user, I want the game to have various working apps such as a browser, file explorer, music player, etc.
 - As a user, I want to be able to view a list of my applications.
-- As a user, I want to be able to download files (apps, music, images, etc.) from the browser app.
+- As a user, I want to be able to download files from the browser app.
+- As a user, I want to be able to view a list of my downloaded files.
 - As a user, I want the game to have challenging but solvable puzzles.
 - As a user, I want my game to be saved when I close the application.
 - As a user, I want the game to have multiple different endings.
