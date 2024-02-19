@@ -166,7 +166,11 @@ public class Game {
 
             switch (input.toLowerCase()) {
                 case "play imagine":
-                    musicPlayer.playSong(0);
+                    try {
+                        musicPlayer.playSong(0);
+                    } catch (Exception e) {
+                        System.out.println("Song could not be played");
+                    }
                     break;
                 default:
                     System.out.println("Could not find song");

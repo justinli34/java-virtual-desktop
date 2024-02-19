@@ -1,9 +1,6 @@
 package model;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
@@ -23,20 +20,16 @@ public class MusicPlayer extends Application {
 
     // MODIFIES: this
     // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays song at given pos
-    public void playSong(int pos) {
+    public void playSong(int pos) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (playing) {
             clip.stop();
             playing = false;
         }
-        try {
-            audio = AudioSystem.getAudioInputStream(songs.get(pos));
-            clip = AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
-            playing = true;
-        } catch (Exception e) {
-            System.out.println("Failed to play song");
-        }
+        audio = AudioSystem.getAudioInputStream(songs.get(pos));
+        clip = AudioSystem.getClip();
+        clip.open(audio);
+        clip.start();
+        playing = true;
     }
 
 //    // EFFECTS: pauses song

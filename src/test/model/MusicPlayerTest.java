@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MusicPlayerTest {
     private MusicPlayer musicPlayer;
@@ -31,7 +30,11 @@ public class MusicPlayerTest {
     @Test
     public void testPlaySong() {
         musicPlayer.addSong("Imagine");
-        musicPlayer.playSong(0);
+        try {
+            musicPlayer.playSong(0);
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
         assertTrue(musicPlayer.isPlaying());
     }
 
@@ -40,10 +43,19 @@ public class MusicPlayerTest {
         musicPlayer.addSong("Imagine");
         musicPlayer.addSong("Beep");
 
-        musicPlayer.playSong(0);
-        assertTrue(musicPlayer.isPlaying());
+        try {
+            musicPlayer.playSong(0);
+            assertTrue(musicPlayer.isPlaying());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
 
-        musicPlayer.playSong(1);
-        assertTrue(musicPlayer.isPlaying());
+        try {
+            musicPlayer.playSong(1);
+            assertTrue(musicPlayer.isPlaying());
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
+
     }
 }
