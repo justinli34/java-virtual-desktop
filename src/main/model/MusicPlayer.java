@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.io.File;
 
 public class MusicPlayer extends Application {
-    private ArrayList<String> songs;
+    private ArrayList<File> songs;
     private String currentSong;
     private AudioInputStream audio;
     private Clip clip;
@@ -20,18 +20,15 @@ public class MusicPlayer extends Application {
         songs = new ArrayList<>();
     }
 
-    // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays new song
-    public void playSong(String song) {
-        String sep = System.getProperty("file.separator");
-        File songFile = new File(System.getProperty("user.dir") + sep + "src" + sep + "main"
-                + sep + "resources" + sep + song + ".wav");
-
+    // MODIFIES: this
+    // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays song at given pos
+    public void playSong(int pos) {
         if (playing) {
             clip.stop();
             playing = false;
         }
         try {
-            audio = AudioSystem.getAudioInputStream(songFile);
+            audio = AudioSystem.getAudioInputStream(songs.get(pos));
             clip = AudioSystem.getClip();
             clip.open(audio);
             clip.start();
@@ -51,11 +48,19 @@ public class MusicPlayer extends Application {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds song with given name to songs list
     public void addSong(String song) {
-        songs.add(song);
+        String sep = System.getProperty("file.separator");
+        File songFile = new File(System.getProperty("user.dir") + sep + "data" + sep + song + ".wav");
+        songs.add(songFile);
     }
 
-    public ArrayList<String> getSongs() {
+    public ArrayList<File> getSongs() {
         return songs;
+    }
+
+    public boolean isPlaying() {
+        return playing;
     }
 }

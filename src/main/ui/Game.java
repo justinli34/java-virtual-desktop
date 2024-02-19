@@ -17,6 +17,9 @@ public class Game {
     private MusicPlayer musicPlayer;
     private Scanner scan;
 
+    // MODIFIES: this
+    // EFFECTS: creates new game with new Launchpad, Home, Scanner, FiberSearch, and MusicPlayer.
+    //          runs game
     public Game() {
         systemRunning = true;
         launchPad = new LaunchPad();
@@ -40,7 +43,6 @@ public class Game {
             input = scan.nextLine();
             handleInput(input);
         }
-
     }
 
     public void greetPlayer() {
@@ -140,23 +142,21 @@ public class Game {
         while (!input.equalsIgnoreCase("Quit")) {
             System.out.println("Music Player");
             System.out.println("Type play + song name");
-            ArrayList<String> songs = musicPlayer.getSongs();
+            ArrayList<File> songs = musicPlayer.getSongs();
 
             for (int i = 0; i < songs.size(); i++) {
-                System.out.println(String.valueOf(i + 1) + ". " + songs.get(i));
+                System.out.println(String.valueOf(i + 1) + ". " + songs.get(i).getName());
             }
 
             input = scan.nextLine();
 
             switch (input.toLowerCase()) {
                 case "play imagine":
-                    musicPlayer.playSong("Imagine");
+                    musicPlayer.playSong(0);
                     break;
                 default:
                     System.out.println("Could not find song");
             }
-
         }
     }
-
 }
