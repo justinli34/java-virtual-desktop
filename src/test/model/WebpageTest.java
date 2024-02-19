@@ -27,4 +27,9 @@ public class WebpageTest {
             fail("Threw unexpected IOException");
         }
     }
+
+    @Test
+    public void testGetName() {
+        assertEquals("Apple", page.getName());
+    }
 }

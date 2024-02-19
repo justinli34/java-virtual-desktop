@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+// A webpage for the Fiber Search app. Has a name/title and a body of text.
 public class Webpage {
     private String name;
     private File text;

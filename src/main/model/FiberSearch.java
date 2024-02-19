@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+// An internet browser app called "Fiber Search". contains a list of webpages.
 public class FiberSearch extends Application {
     private ArrayList<Webpage> webpages;
 

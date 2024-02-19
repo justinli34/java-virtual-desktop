@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 
+// A music player app containing a list of downloaded songs.
 public class MusicPlayer extends Application {
     private ArrayList<File> songs;
     private String currentSong;
@@ -38,15 +39,15 @@ public class MusicPlayer extends Application {
         }
     }
 
-    // EFFECTS: pauses song
-    public void pauseSong() {
-
-    }
-
-    // EFFECTS: start song at given time point
-    public void scrubSong(int time) {
-
-    }
+//    // EFFECTS: pauses song
+//    public void pauseSong() {
+//
+//    }
+//
+//    // EFFECTS: start song at given time point
+//    public void scrubSong(int time) {
+//
+//    }
 
     // MODIFIES: this
     // EFFECTS: adds song with given name to songs list

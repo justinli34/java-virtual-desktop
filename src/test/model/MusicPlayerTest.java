@@ -32,4 +32,14 @@ public class MusicPlayerTest {
         musicPlayer.playSong(0);
         assertTrue(musicPlayer.isPlaying());
     }
+
+    @Test
+    public void testPlaySongTwice() {
+        musicPlayer.addSong("Imagine");
+        musicPlayer.playSong(0);
+        assertTrue(musicPlayer.isPlaying());
+
+        musicPlayer.playSong(0);
+        assertTrue(musicPlayer.isPlaying());
+    }
 }

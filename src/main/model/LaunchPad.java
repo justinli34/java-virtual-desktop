@@ -7,8 +7,4 @@ public class LaunchPad {
     public LaunchPad() {
 
     }
-
-    public void launch() {
-
-    }
 }
