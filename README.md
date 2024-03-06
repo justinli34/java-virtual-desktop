@@ -30,6 +30,7 @@ This game is inspired by games like _Hypnospace Outlaw_, _Citizen Sleeper_, and 
 - As a user, I want to be able to download files from the browser app.
 - As a user, I want to be able to view a list of my downloaded files.
 - As a user, I want the game to have challenging but solvable puzzles.
-- As a user, I want my game to be saved when I close the application.
+- As a user, I want to be able to save my game when I close the application. 
+- As a user, I want to be able to create a new game file or load a previous game file.
 - As a user, I want the game to have multiple different endings.
 - As a user, I want to be able to interact with Arch Technologies in different ways.
