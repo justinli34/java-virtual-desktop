@@ -12,9 +12,11 @@ public class Home implements Writable {
 
     // EFFECTS: creates a home screen with an empty list of apps
     public Home() {
-        appList = new ArrayList<Application>();
+        appList = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds given application to appList
     public void addApplication(Application a) {
         appList.add(a);
     }

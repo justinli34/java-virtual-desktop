@@ -7,7 +7,6 @@ import persistence.JsonWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
@@ -208,7 +207,7 @@ public class Game {
             ArrayList<File> songs = musicPlayer.getSongs();
 
             for (int i = 0; i < songs.size(); i++) {
-                System.out.println(String.valueOf(i + 1) + ". " + songs.get(i).getName());
+                System.out.println(i + 1 + ". " + songs.get(i).getName());
             }
 
             input = scan.nextLine();
@@ -233,7 +232,7 @@ public class Game {
 
         while (!input.equalsIgnoreCase("Quit")) {
             System.out.println("File Explorer");
-            Set<String> files = fileExplorer.getFiles();
+            Set<String> files = fileExplorer.getFiles().keySet();
 
             for (String s : files) {
                 System.out.println(s);

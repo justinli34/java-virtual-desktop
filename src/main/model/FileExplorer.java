@@ -29,8 +29,8 @@ public class FileExplorer extends Application {
     }
 
     // EFFECTS: returns files
-    public Set<String> getFiles() {
-        return files.keySet();
+    public Map<String, File> getFiles() {
+        return files;
     }
 
     public String openTextFile(String s) throws IOException {

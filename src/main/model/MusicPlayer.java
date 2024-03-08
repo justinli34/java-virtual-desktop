@@ -45,7 +45,7 @@ public class MusicPlayer extends Application {
 //
 //    }
 
-    // MODIFIES: this
+    // MODIFIES: this, fileExplorer
     // EFFECTS: adds song with given name to songs list
     public void addSong(String song) {
         String sep = System.getProperty("file.separator");
