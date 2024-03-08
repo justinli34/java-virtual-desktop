@@ -92,7 +92,6 @@ public class Game {
     }
 
     // EFFECTS: handles keyboard input. calls appropriate application runner method.
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void handleInput(String input) {
         switch (input.toLowerCase()) {
             case "fiber search":
@@ -107,19 +106,23 @@ public class Game {
             case "exit":
                 System.out.println("Save current game?");
                 if (scan.nextLine().equalsIgnoreCase("yes")) {
-                    try {
-                        jsonWriter.open();
-                        jsonWriter.write(home);
-                        jsonWriter.close();
-                        System.out.println("Game saved successfully");
-                    } catch (FileNotFoundException e) {
-                        System.out.println("Unable to save game");
-                    }
+                    saveGame();
                 }
                 System.exit(0);
                 break;
             default:
                 System.out.println("No such application found.");
+        }
+    }
+
+    public void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(home);
+            jsonWriter.close();
+            System.out.println("Game saved successfully");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save game");
         }
     }
 
