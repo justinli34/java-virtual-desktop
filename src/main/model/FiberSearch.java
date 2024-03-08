@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class FiberSearch extends Application {
         this.addWebpage(new Webpage("John's Music Blog", johnsMusicBlog));
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds given webpage to webpages
     public void addWebpage(Webpage p) {
         webpages.add(p);
     }
@@ -34,5 +38,14 @@ public class FiberSearch extends Application {
             }
         }
         return webpages;
+    }
+
+    // EFFECTS: returns this as JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("webpages", webpages);
+        return json;
     }
 }

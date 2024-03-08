@@ -1,13 +1,16 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Home screen of the operating system. Contains a list of apps.
-public class Home {
+public class Home implements Writable {
     private ArrayList<Application> appList;
 
-    // creates a home screen with an empty list of apps
+    // EFFECTS: creates a home screen with an empty list of apps
     public Home() {
         appList = new ArrayList<Application>();
     }
@@ -22,5 +25,18 @@ public class Home {
 
     public ArrayList<Application> getAppList() {
         return appList;
+    }
+
+    // EFFECTS: returns this as JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (Application a : appList) {
+            jsonArray.put(a.toJson());
+        }
+        json.put("apps", jsonArray);
+        return json;
     }
 }

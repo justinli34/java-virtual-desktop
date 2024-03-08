@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,5 +59,21 @@ public class MusicPlayer extends Application {
 
     public boolean isPlaying() {
         return playing;
+    }
+
+    // EFFECTS: returns this as JSONObject
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+
+        JSONArray jsonArray = new JSONArray();
+        for (File f : songs) {
+            JSONObject song = new JSONObject();
+            song.put("songName", f.getName().substring(0, f.getName().length() - 4));
+            jsonArray.put(song);
+        }
+        json.put("songs", jsonArray);
+        return json;
     }
 }

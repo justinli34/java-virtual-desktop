@@ -1,12 +1,16 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.channels.WritableByteChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 // The game. Contains all data relating to the game. Read README for a description of the game.
 public class Game {
@@ -15,20 +19,44 @@ public class Game {
     private Home home;
     private FiberSearch fiberSearch;
     private MusicPlayer musicPlayer;
+    private FileExplorer fileExplorer;
     private Scanner scan;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // MODIFIES: this
-    // EFFECTS: creates new game with new Home, Scanner, FiberSearch, and MusicPlayer.
+    // EFFECTS: loads game file
+    //          or creates new game with new Home, Scanner, FiberSearch, and MusicPlayer.
     //          runs game
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public Game() {
         systemRunning = true;
-        home = new Home();
         scan = new Scanner(System.in);
-        fiberSearch = new FiberSearch();
-        musicPlayer = new MusicPlayer();
+        jsonWriter = new JsonWriter("./data/Game1");
+        jsonReader = new JsonReader("./data/Game1");
+        System.out.println("Load previous save?");
+        String input = scan.nextLine();
+        if (input.equalsIgnoreCase("yes")) {
+            try {
+                home = jsonReader.read();
+                fiberSearch = (FiberSearch) home.getAppList().get(0);
+                musicPlayer = (MusicPlayer) home.getAppList().get(1);
+                fileExplorer = (FileExplorer) home.getAppList().get(2);
+                System.out.println("Loaded game from previous save");
+            } catch (IOException e) {
+                System.out.println("Unable to read from file");
+            }
+        } else {
+            home = new Home();
 
-        home.addApplication(fiberSearch);
-        home.addApplication(musicPlayer);
+            fiberSearch = new FiberSearch();
+            musicPlayer = new MusicPlayer();
+            fileExplorer = new FileExplorer();
+
+            home.addApplication(fiberSearch);
+            home.addApplication(musicPlayer);
+            home.addApplication(fileExplorer);
+        }
 
         runGame();
     }
@@ -60,7 +88,8 @@ public class Game {
         }
     }
 
-    // EFFECTS: handles keyboard input concerning running applications. calls appropriate application runner method.
+    // EFFECTS: handles keyboard input. calls appropriate application runner method.
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void handleInput(String input) {
         switch (input.toLowerCase()) {
             case "fiber search":
@@ -69,7 +98,21 @@ public class Game {
             case "music player":
                 runMusicPlayer();
                 break;
+            case "file explorer":
+                runFileExplorer();
+                break;
             case "exit":
+                System.out.println("Save current game?");
+                if (scan.nextLine().equalsIgnoreCase("yes")) {
+                    try {
+                        jsonWriter.open();
+                        jsonWriter.write(home);
+                        jsonWriter.close();
+                        System.out.println("Game saved successfully");
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Unable to save game");
+                    }
+                }
                 System.exit(0);
                 break;
             default:
@@ -132,6 +175,10 @@ public class Game {
             if (input.equals("P1ZZ4")) {
                 System.out.println("-Pizza image-");
             }
+            if (input.equals("RECIPE")) {
+                fileExplorer.addFile(new File("./data/pizzarecipe.txt"));
+                System.out.println("Downloaded pizzarecipe.txt");
+            }
         }
     }
 
@@ -140,11 +187,13 @@ public class Game {
     public void browseJohnsMusicBlog() throws IOException {
         String input = "";
         System.out.println(fiberSearch.getWebpages().get(1).getText());
+
         while (!input.equalsIgnoreCase("back")) {
             input = scan.nextLine();
             if (input.equalsIgnoreCase("download imagine")) {
                 musicPlayer.addSong("Imagine");
-                System.out.println("Downloaded Imagine by John Lennon");
+                fileExplorer.addFile(new File("./data/Imagine.wav"));
+                System.out.println("Downloaded Imagine.mp3");
             }
         }
     }
@@ -175,6 +224,30 @@ public class Game {
                 default:
                     System.out.println("Could not find song");
             }
+        }
+    }
+
+    // EFFECTS: runs file explorer and handles input concerning files
+    public void runFileExplorer() {
+        String input = "";
+
+        while (!input.equalsIgnoreCase("Quit")) {
+            System.out.println("File Explorer");
+            Set<String> files = fileExplorer.getFiles();
+
+            for (String s : files) {
+                System.out.println(s);
+            }
+
+            if (input.equalsIgnoreCase("pizza recipe")) {
+                try {
+                    System.out.println(fileExplorer.openTextFile("pizzarecipe.txt"));
+                } catch (Exception e) {
+                    System.out.println("File could not be opened");
+                }
+            }
+
+            input = scan.nextLine();
         }
     }
 }
