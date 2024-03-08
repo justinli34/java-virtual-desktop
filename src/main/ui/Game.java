@@ -27,7 +27,7 @@ public class Game {
     // EFFECTS: loads game file
     //          or creates new game with new Home, Scanner, FiberSearch, and MusicPlayer.
     //          runs game
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+
     public Game() {
         systemRunning = true;
         scan = new Scanner(System.in);
@@ -36,15 +36,7 @@ public class Game {
         System.out.println("Load previous save?");
         String input = scan.nextLine();
         if (input.equalsIgnoreCase("yes")) {
-            try {
-                home = jsonReader.read();
-                fiberSearch = (FiberSearch) home.getAppList().get(0);
-                musicPlayer = (MusicPlayer) home.getAppList().get(1);
-                fileExplorer = (FileExplorer) home.getAppList().get(2);
-                System.out.println("Loaded game from previous save");
-            } catch (IOException e) {
-                System.out.println("Unable to read from file");
-            }
+            loadGame();
         } else {
             home = new Home();
 
@@ -58,6 +50,18 @@ public class Game {
         }
 
         runGame();
+    }
+
+    public void loadGame() {
+        try {
+            home = jsonReader.read();
+            fiberSearch = (FiberSearch) home.getAppList().get(0);
+            musicPlayer = (MusicPlayer) home.getAppList().get(1);
+            fileExplorer = (FileExplorer) home.getAppList().get(2);
+            System.out.println("Loaded game from previous save");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file");
+        }
     }
 
     // EFFECTS: while the game is running, prints list of apps and handles keyboard input
