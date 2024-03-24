@@ -38,6 +38,12 @@ public class FileExplorer extends Application {
         return Files.readString(Paths.get(f.getAbsolutePath()));
     }
 
+    // EFFECTS: recovers lost mail file
+    // MODIFIES: this
+    public void recoverFiles() {
+        addFile(new File("./data/BibleStudyMail"));
+    }
+
     // EFFECTS: returns this as JSONObject
     @Override
     public JSONObject toJson() {

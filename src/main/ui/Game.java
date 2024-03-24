@@ -7,9 +7,7 @@ import persistence.JsonWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 // The game. Contains all data relating to the game. Read README for a description of the game.
 public class Game {
@@ -19,6 +17,7 @@ public class Game {
     private FiberSearch fiberSearch;
     private MusicPlayer musicPlayer;
     private FileExplorer fileExplorer;
+    private SeaShell seaShell;
     private Scanner scan;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -27,7 +26,6 @@ public class Game {
     // EFFECTS: loads game file
     //          or creates new game with new Home, Scanner, FiberSearch, and MusicPlayer.
     //          runs game
-
     public Game() {
         systemRunning = true;
         scan = new Scanner(System.in);
@@ -43,21 +41,27 @@ public class Game {
             fiberSearch = new FiberSearch();
             musicPlayer = new MusicPlayer();
             fileExplorer = new FileExplorer();
+            seaShell = new SeaShell();
 
             home.addApplication(fiberSearch);
             home.addApplication(musicPlayer);
             home.addApplication(fileExplorer);
+            home.addApplication(seaShell);
         }
 
         runGame();
     }
 
+    // EFFECTS: loads previously saved game
     public void loadGame() {
         try {
             home = jsonReader.read();
             fiberSearch = (FiberSearch) home.getAppList().get(0);
             musicPlayer = (MusicPlayer) home.getAppList().get(1);
             fileExplorer = (FileExplorer) home.getAppList().get(2);
+            seaShell = (SeaShell) home.getAppList().get(3);
+//            seaShell = new SeaShell();
+//            home.addApplication(seaShell);
             System.out.println("Loaded game from previous save");
         } catch (IOException e) {
             System.out.println("Unable to read from file");
@@ -103,6 +107,9 @@ public class Game {
             case "file explorer":
                 runFileExplorer();
                 break;
+            case "sea shell":
+                runSeaShell();
+                break;
             case "exit":
                 System.out.println("Save current game?");
                 if (scan.nextLine().equalsIgnoreCase("yes")) {
@@ -115,6 +122,7 @@ public class Game {
         }
     }
 
+    // EFFECTS: saves current game
     public void saveGame() {
         try {
             jsonWriter.open();
@@ -169,6 +177,12 @@ public class Game {
             } catch (IOException e) {
                 System.out.println("John's Music Blog could not be found");
             }
+        } else if (input.equalsIgnoreCase("Best Tech Forum")) {
+            try {
+                browseBestTechForum();
+            } catch (IOException e) {
+                System.out.println("Best Tech Forum could not be found");
+            }
         }
     }
 
@@ -199,8 +213,22 @@ public class Game {
             if (input.equalsIgnoreCase("download imagine")) {
                 musicPlayer.addSong("Imagine");
                 fileExplorer.addFile(new File("./data/Imagine.wav"));
-                System.out.println("Downloaded Imagine.mp3");
+                System.out.println("Downloaded Imagine.wav");
+            } else if (input.equalsIgnoreCase("download billie jean")) {
+                musicPlayer.addSong("BillieJean");
+                fileExplorer.addFile(new File("./data/BillieJean.wav"));
+                System.out.println("Downloaded BillieJean.wav");
             }
+        }
+    }
+
+    // EFFECTS: prints Best Tech Forum
+    public void browseBestTechForum() throws IOException {
+        String input = "";
+        System.out.println(fiberSearch.getWebpages().get(2).getText());
+
+        while (!input.equalsIgnoreCase("back")) {
+            input = scan.nextLine();
         }
     }
 
@@ -210,26 +238,39 @@ public class Game {
 
         while (!input.equalsIgnoreCase("Quit")) {
             System.out.println("Music Player");
-            System.out.println("Type play + song name");
-            ArrayList<File> songs = musicPlayer.getSongs();
+            System.out.println("Type song name to play");
+            Map<String, File> songs = musicPlayer.getSongs();
 
-            for (int i = 0; i < songs.size(); i++) {
-                System.out.println(i + 1 + ". " + songs.get(i).getName());
+            for (var entry : songs.entrySet()) {
+                System.out.println("- " + entry.getValue().getName());
             }
 
             input = scan.nextLine();
 
-            switch (input.toLowerCase()) {
-                case "play imagine":
-                    try {
-                        musicPlayer.playSong(0);
-                    } catch (Exception e) {
-                        System.out.println("Song could not be played");
-                    }
-                    break;
-                default:
-                    System.out.println("Could not find song");
+            try {
+                musicPlayer.playSong(input);
+            } catch (Exception e) {
+                System.out.println("Song could not be played");
             }
+
+//            switch (input.toLowerCase()) {
+//                case "play imagine":
+//                    try {
+//                        musicPlayer.playSong("Imagine");
+//                    } catch (Exception e) {
+//                        System.out.println("Song could not be played");
+//                    }
+//                    break;
+//                case "play unknownaudio":
+//                    try {
+//                        musicPlayer.playSong("unknownaudio");
+//                    } catch (Exception e) {
+//                        System.out.println("Song could not be played");
+//                    }
+//                    break;
+//                default:
+//                    System.out.println("Could not find song");
+//            }
         }
     }
 
@@ -251,9 +292,34 @@ public class Game {
                 } catch (Exception e) {
                     System.out.println("File could not be opened");
                 }
+            } else if (input.equalsIgnoreCase("bible study")) {
+                try {
+                    System.out.println(fileExplorer.openTextFile("BibleStudyMail"));
+                } catch (Exception e) {
+                    System.out.println("File could not be opened");
+                }
             }
 
             input = scan.nextLine();
+        }
+    }
+
+    // EFFECTS: runs sea shell and handles command inputs
+    public void runSeaShell() {
+        String input = "";
+
+        System.out.println("Sea Shell");
+
+        while (!input.equalsIgnoreCase("Quit")) {
+            input = scan.nextLine();
+
+            int cs = seaShell.handleInput(input);
+
+            if (cs == 1) {
+                musicPlayer.addSong("unknownaudio");
+            } else if (cs == 2) {
+                fileExplorer.recoverFiles();
+            }
         }
     }
 }

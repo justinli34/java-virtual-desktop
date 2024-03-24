@@ -7,10 +7,12 @@ import javax.sound.sampled.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 // A music player app containing a list of downloaded songs.
 public class MusicPlayer extends Application {
-    private ArrayList<File> songs;
+    private Map<String, File> songs;
     private String currentSong;
     private AudioInputStream audio;
     private Clip clip;
@@ -18,17 +20,17 @@ public class MusicPlayer extends Application {
 
     public MusicPlayer() {
         super("Music Player");
-        songs = new ArrayList<>();
+        songs = new HashMap<>();
     }
 
     // MODIFIES: this
     // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays song at given pos
-    public void playSong(int pos) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    public void playSong(String name) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         if (playing) {
             clip.stop();
             playing = false;
         }
-        audio = AudioSystem.getAudioInputStream(songs.get(pos));
+        audio = AudioSystem.getAudioInputStream(songs.get(name));
         clip = AudioSystem.getClip();
         clip.open(audio);
         clip.start();
@@ -50,10 +52,10 @@ public class MusicPlayer extends Application {
     public void addSong(String song) {
         String sep = System.getProperty("file.separator");
         File songFile = new File(System.getProperty("user.dir") + sep + "data" + sep + song + ".wav");
-        songs.add(songFile);
+        songs.put(song, songFile);
     }
 
-    public ArrayList<File> getSongs() {
+    public Map<String, File> getSongs() {
         return songs;
     }
 
@@ -68,7 +70,7 @@ public class MusicPlayer extends Application {
         json.put("name", name);
 
         JSONArray jsonArray = new JSONArray();
-        for (File f : songs) {
+        for (File f : songs.values()) {
             JSONObject song = new JSONObject();
             song.put("songName", f.getName().substring(0, f.getName().length() - 4));
             jsonArray.put(song);

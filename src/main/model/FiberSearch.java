@@ -18,9 +18,11 @@ public class FiberSearch extends Application {
         String sep = System.getProperty("file.separator");
         File tonysPizza = new File(System.getProperty("user.dir") + sep + "data" + sep + "TonysPizzaText");
         File johnsMusicBlog = new File(System.getProperty("user.dir") + sep + "data" + sep + "JohnsMusicBlogText");
+        File bestTechForum = new File(System.getProperty("user.dir") + sep + "data" + sep + "BestTechForumText");
 
         this.addWebpage(new Webpage("Tony's Pizza", tonysPizza));
         this.addWebpage(new Webpage("John's Music Blog", johnsMusicBlog));
+        this.addWebpage(new Webpage("Best Tech Forum", bestTechForum));
     }
 
     // MODIFIES: this

@@ -3,12 +3,12 @@
         "webpages": [
             {
                 "name": "Tony's Pizza",
-                "numVisits": 0,
+                "numVisits": 1,
                 "text": "We are thrilled to announce the upcoming grand opening of Tony's Pizza, your premier destination for authentic Italian cuisine delivered straight through your screen!\nJoin us on March 10th for a culinary extravaganza, featuring special promotions, exclusive discounts, and a chance to win free pizza for a year!\nType code \"P1ZZ4\" for a free sample ahead of the big event!\nType code \"RECIPE\" for a printout of our most popular recipe!"
             },
             {
                 "name": "John's Music Blog",
-                "numVisits": 0,
+                "numVisits": 1,
                 "text": "Welcome to John's Music Blog! To download a song, type \"download\" and the name of the song you want.\n1. John Lennon - Imagine"
             }
         ],

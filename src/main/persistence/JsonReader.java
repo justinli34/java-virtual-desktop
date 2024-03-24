@@ -78,6 +78,8 @@ public class JsonReader {
                 File file = new File(((JSONObject) json).getString("path"));
                 ((FileExplorer) app).addFile(file);
             }
+        } else if (name.equals("Sea Shell")) {
+            app = new SeaShell();
         }
 
         h.addApplication(app);

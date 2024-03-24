@@ -1,0 +1,11 @@
+Demystifying SeaShell: Your Quick Guide
+
+Recently, readers of the blog have been asking about the hidden features of SeaShell. This short post will cover a few recently discovered commands.
+
+1. Recovering deleted files
+To recover your deleted files, simply type "ss recover" and your files will reappear in your file explorer.
+
+2. Secret codes
+Users have been reporting "secret codes" that can be entered into SeaShell with varying effects. We have yet to validate these claims. To try for yourself, type "ss [code]".
+
+Stay tuned for more insights from BestTech. Happy exploring!
