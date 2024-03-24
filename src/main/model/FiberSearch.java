@@ -10,7 +10,7 @@ public class FiberSearch extends Application {
     private ArrayList<Webpage> webpages;
 
     // MODIFIES: this
-    // EFFECTS: creates a FiberSearch object with 2 webpages: Tony's Pizza and John's Music Blog
+    // EFFECTS: creates a FiberSearch object with 3 webpages: Tony's Pizza and John's Music Blog and Best Tech Forum
     public FiberSearch() {
         super("Fiber Search");
         webpages = new ArrayList<>();
