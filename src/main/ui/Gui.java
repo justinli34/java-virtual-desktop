@@ -37,6 +37,7 @@ public class Gui extends JFrame implements ActionListener {
         setBounds(0, 0, 1920, 1080);
 
         desktop = new JDesktopPane();
+        desktop.setBackground(new Color(168, 204, 255));
         setContentPane(desktop);
         setJMenuBar(createMenuBar());
 
@@ -80,9 +81,9 @@ public class Gui extends JFrame implements ActionListener {
         menuItem.addActionListener(e -> openFiberSearch(fiberSearch));
         appMenu.add(menuItem);
 
-//        menuItem = new JMenuItem("Music Player");
-//        menuItem.addActionListener(e -> openMusicPlayer());
-//        appMenu.add(menuItem);
+        menuItem = new JMenuItem("Music Player");
+        menuItem.addActionListener(e -> openMusicPlayer());
+        appMenu.add(menuItem);
 //
 //        menuItem = new JMenuItem("File Explorer");
 //        menuItem.addActionListener(e -> openFileExplorer());
@@ -109,22 +110,22 @@ public class Gui extends JFrame implements ActionListener {
         try {
             frame.setSelected(true);
         } catch (java.beans.PropertyVetoException e) {
-            //
+            e.printStackTrace();
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a fiber search frame
-//    protected void openMusicPlayer() {
-//        AppFrame frame = new FiberSearchFrame();
-//        frame.setVisible(true);
-//        desktop.add(frame);
-//        try {
-//            frame.setSelected(true);
-//        } catch (java.beans.PropertyVetoException e) {
-//            //
-//        }
-//    }
+    // EFFECTS: creates a music player frame
+    protected void openMusicPlayer() {
+        AppFrame frame = new MusicPlayerFrame(musicPlayer);
+        frame.setVisible(true);
+        desktop.add(frame);
+        try {
+            frame.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            e.printStackTrace();
+        }
+    }
 
     // MODIFIES: this
     // EFFECTS: creates a fiber search frame
