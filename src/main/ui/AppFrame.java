@@ -2,12 +2,14 @@ package ui;
 
 import javax.swing.*;
 
+// The superclass for all application frames
 public class AppFrame extends JInternalFrame {
 
-    public AppFrame() {
-        super("App", true, true, true, true);
+    // EFFECTS: creates a JInternalFrame with given title, width and height
+    public AppFrame(String title, int w, int h) {
+        super(title, false, true, false, true);
 
-        setSize(300,300);
+        setSize(w,h);
 
         setLocation(10, 10);
     }

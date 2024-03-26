@@ -1,14 +1,21 @@
 package ui;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+// GUI of the game. "Virtual desktop". contains all model data
 public class Gui extends JFrame implements ActionListener {
     private JDesktopPane desktop;
     private Home home;
@@ -19,6 +26,8 @@ public class Gui extends JFrame implements ActionListener {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+    // MODIFIES: this
+    // EFFECTS: creates an empty desktop pane with a menu bar. initializes all model objects
     public Gui() {
         super("ArkNet");
 
@@ -31,11 +40,20 @@ public class Gui extends JFrame implements ActionListener {
         setContentPane(desktop);
         setJMenuBar(createMenuBar());
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                quit();
+            }
+        });
+
+        openFiberSearch(fiberSearch);
 
         setVisible(true);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes apps
     protected void setupModel() {
         jsonWriter = new JsonWriter("./data/Game1");
         jsonReader = new JsonReader("./data/Game1");
@@ -52,37 +70,40 @@ public class Gui extends JFrame implements ActionListener {
         home.addApplication(seaShell);
     }
 
+    // EFFECTS: returns a menu bar with apps as options
     protected JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
+        JMenu appMenu = new JMenu("Apps");
+        menuBar.add(appMenu);
 
-        //Set up the lone menu.
-        JMenu menu = new JMenu("Apps");
-//        menu.setMnemonic(KeyEvent.VK_D);
-        menuBar.add(menu);
+        JMenuItem menuItem = new JMenuItem("Fiber Search");
+        menuItem.addActionListener(e -> openFiberSearch(fiberSearch));
+        appMenu.add(menuItem);
 
-        //Set up the first menu item.
-        JMenuItem menuItem = new JMenuItem("New");
-        menuItem.setActionCommand("new");
-        menuItem.addActionListener(e -> createFrame());
-        menu.add(menuItem);
-
-        //Set up the second menu item.
-        menuItem = new JMenuItem("Quit");
-        menuItem.setActionCommand("quit");
-        menuItem.addActionListener(e -> quit());
-        menu.add(menuItem);
+//        menuItem = new JMenuItem("Music Player");
+//        menuItem.addActionListener(e -> openMusicPlayer());
+//        appMenu.add(menuItem);
+//
+//        menuItem = new JMenuItem("File Explorer");
+//        menuItem.addActionListener(e -> openFileExplorer());
+//        appMenu.add(menuItem);
+//
+//        menuItem = new JMenuItem("Sea Shell");
+//        menuItem.addActionListener(e -> openSeaShell());
+//        appMenu.add(menuItem);
 
         return menuBar;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    // unused
+        // unused
     }
 
-    //Create a new internal frame.
-    protected void createFrame() {
-        AppFrame frame = new AppFrame();
+    // MODIFIES: this
+    // EFFECTS: creates a fiber search frame
+    protected void openFiberSearch(FiberSearch fiberSearch) {
+        AppFrame frame = new FiberSearchFrame(fiberSearch, musicPlayer, fileExplorer);
         frame.setVisible(true);
         desktop.add(frame);
         try {
@@ -92,7 +113,46 @@ public class Gui extends JFrame implements ActionListener {
         }
     }
 
-    //Quit the application.
+    // MODIFIES: this
+    // EFFECTS: creates a fiber search frame
+//    protected void openMusicPlayer() {
+//        AppFrame frame = new FiberSearchFrame();
+//        frame.setVisible(true);
+//        desktop.add(frame);
+//        try {
+//            frame.setSelected(true);
+//        } catch (java.beans.PropertyVetoException e) {
+//            //
+//        }
+//    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a fiber search frame
+//    protected void openFileExplorer() {
+//        AppFrame frame = new FiberSearchFrame();
+//        frame.setVisible(true);
+//        desktop.add(frame);
+//        try {
+//            frame.setSelected(true);
+//        } catch (java.beans.PropertyVetoException e) {
+//            //
+//        }
+//    }
+//
+    // MODIFIES: this
+    // EFFECTS: creates a fiber search frame
+//    protected void openSeaShell() {
+//        AppFrame frame = new FiberSearchFrame();
+//        frame.setVisible(true);
+//        desktop.add(frame);
+//        try {
+//            frame.setSelected(true);
+//        } catch (java.beans.PropertyVetoException e) {
+//            //
+//        }
+//    }
+
+    // EFFECTS: presents options to quit and save the application
     protected void quit() {
         int n = JOptionPane.showConfirmDialog(this, "Save current progress?", "Quit", JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION) {

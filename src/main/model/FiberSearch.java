@@ -8,6 +8,7 @@ import java.util.ArrayList;
 // An internet browser app called "Fiber Search". contains a list of webpages.
 public class FiberSearch extends Application {
     private ArrayList<Webpage> webpages;
+    private final String url = "www.machinegallery.com";
 
     // MODIFIES: this
     // EFFECTS: creates a FiberSearch object with 3 webpages: Tony's Pizza and John's Music Blog and Best Tech Forum
@@ -39,6 +40,10 @@ public class FiberSearch extends Application {
             }
         }
         return webpages;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     // EFFECTS: returns this as JSONObject

@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
-// a command prompt app
+// a command prompt app with two accepted commands
 public class SeaShell extends Application {
     private final String code = "5243817791";
 
