@@ -33,3 +33,12 @@ This game is inspired by games like _Hypnospace Outlaw_, _Citizen Sleeper_, and 
 - As a user, I want to be able to save my game when I close the application. 
 - As a user, I want to be able to create a new game file or load a previous game file.
 - As a user, I want the game to have multiple different endings.
+
+## Instructions for Grader
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the Apps button
+    in the menu and going to Fiber Search. Then, go to John's Music Blog and download some songs. 
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by opening the Music Player
+    from the menu and clicking on the song buttons to play them. Press the pause or resume buttons to pause or resume the song.
+- You can locate my visual component by going to Fiber Search and going to Tony's Pizza.
+- You can save the state of my application by closing the application. There will be a dialog popup asking if you want to save.
+- You can reload the state of my application by opening the application. There will be a dialog popup asking if you want to load.
