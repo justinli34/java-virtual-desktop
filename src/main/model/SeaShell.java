@@ -12,6 +12,7 @@ public class SeaShell extends Application {
 
     // EFFECTS: returns 1 for code input
     //          returns 2 for file recovery
+    //          returns 0 for nothing
     public int handleInput(String input) {
         if (input.equals("ss " + code)) {
             return 1;

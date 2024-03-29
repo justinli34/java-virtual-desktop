@@ -22,6 +22,7 @@
     {
         "songs": [
             {"songName": "BillieJean"},
+            {"songName": "Faraon"},
             {"songName": "Imagine"}
         ],
         "name": "Music Player"

@@ -57,7 +57,7 @@ public class Gui extends JFrame implements ActionListener {
             }
         });
 
-        openFiberSearch(fiberSearch);
+//        openFiberSearch(fiberSearch);
 
         setVisible(true);
     }

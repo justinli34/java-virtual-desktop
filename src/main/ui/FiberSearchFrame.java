@@ -26,6 +26,7 @@ public class FiberSearchFrame extends AppFrame {
     private JPanel pizzaPage;
     private JPanel musicPage;
     private JPanel techPage;
+    private JPanel machineGalleryPage;
     private final int bookmarksX = 290;
 
     // MODIFIES: this
@@ -227,21 +228,24 @@ public class FiberSearchFrame extends AppFrame {
         musicPage = new JPanel();
         musicPage.setSize(700, 500);
         musicPage.setLocation(0, 0);
-        musicPage.setBackground(new Color(15, 96, 209));
+        musicPage.setBackground(new Color(247, 239, 143));
 
         musicPage.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         initMusicText();
         initSongLinks();
+        initSongLinks2();
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> returnToSearch());
-        c.gridy = 4;
+        c.gridy = 5;
         c.insets = new Insets(20, 0, 0, 0);
         musicPage.add(backButton, c);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes music text labels
     public void initMusicText() {
         GridBagConstraints c = new GridBagConstraints();
 
@@ -253,6 +257,8 @@ public class FiberSearchFrame extends AppFrame {
         musicPage.add(text, c);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes first 2 song links
     public void initSongLinks() {
         GridBagConstraints c = new GridBagConstraints();
 
@@ -282,6 +288,25 @@ public class FiberSearchFrame extends AppFrame {
         musicPage.add(songLink, c);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes next song links
+    public void initSongLinks2() {
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel songLink = new JLabel("<HTML><U>Harold Budd - Faraon</U></HTML>");
+        songLink.setForeground(Color.BLUE.darker());
+        songLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        songLink.addMouseListener(new MouseAdapter() {
+            // EFFECTS: calls helper to download song
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                downloadSong("Faraon");
+            }
+        });
+        c.gridy = 4;
+        musicPage.add(songLink, c);
+    }
+
     // MODIFIES: musicPlayer
     // EFFECTS: downloads song with given name
     public void downloadSong(String name) {
@@ -303,9 +328,44 @@ public class FiberSearchFrame extends AppFrame {
         @Override
         public void actionPerformed(ActionEvent ev) {
             if (searchField.getText().equals(fiberSearch.getUrl())) {
-                System.out.println("URL accessed");
+                openMachineGallery();
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: opens machine gallery website
+    public void openMachineGallery() {
+        initMachineGalleryPage();
+        getContentPane().removeAll();
+        getContentPane().add(machineGalleryPage);
+        revalidate();
+        repaint();
+    }
+
+    public void initMachineGalleryPage() {
+        BufferedImage bg = null;
+        try {
+            bg = ImageIO.read(new File("./data/machinegallerybg.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image scaledBg = bg.getScaledInstance(700, 500, Image.SCALE_SMOOTH);
+
+        machineGalleryPage = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(scaledBg, 0, 0, null);
+            }
+        };
+        machineGalleryPage.setSize(700, 500);
+        machineGalleryPage.setLocation(0, 0);
+//        machineGalleryPage.setBackground(new Color(166, 3, 33));
+
+        machineGalleryPage.setLayout(null);
+
+
     }
 
     // MODIFIES: this
