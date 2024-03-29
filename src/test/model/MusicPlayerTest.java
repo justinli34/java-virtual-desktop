@@ -17,13 +17,13 @@ public class MusicPlayerTest {
         musicPlayer = new MusicPlayer();
         String sep = System.getProperty("file.separator");
         songFile = new File(System.getProperty("user.dir") + sep + "data" + sep + "Imagine" + ".wav");
-        songFile2 = new File(System.getProperty("user.dir") + sep + "data" + sep + "Beep" + ".wav");
+        songFile2 = new File(System.getProperty("user.dir") + sep + "data" + sep + "BillieJean" + ".wav");
     }
 
     @Test
     public void testAddSong() {
         musicPlayer.addSong("Imagine");
-        assertEquals(musicPlayer.getSongs().get(0), songFile);
+        assertEquals(musicPlayer.getSongs().get("Imagine"), songFile);
         assertEquals(1, musicPlayer.getSongs().size());
     }
 
@@ -31,7 +31,7 @@ public class MusicPlayerTest {
     public void testPlaySong() {
         musicPlayer.addSong("Imagine");
         try {
-            musicPlayer.playSong(0);
+            musicPlayer.playSong("Imagine");
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
@@ -41,21 +41,51 @@ public class MusicPlayerTest {
     @Test
     public void testPlaySongSwitchSong() {
         musicPlayer.addSong("Imagine");
-        musicPlayer.addSong("Beep");
+        musicPlayer.addSong("BillieJean");
 
         try {
-            musicPlayer.playSong(0);
+            musicPlayer.playSong("Imagine");
             assertTrue(musicPlayer.isPlaying());
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
 
         try {
-            musicPlayer.playSong(1);
+            musicPlayer.playSong("BillieJean");
             assertTrue(musicPlayer.isPlaying());
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
+    }
+
+    @Test
+    public void testPauseSong() {
+        musicPlayer.addSong("Imagine");
+        assertFalse(musicPlayer.isPaused());
+        try {
+            musicPlayer.playSong("Imagine");
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
+        musicPlayer.pauseSong();
+        assertTrue(musicPlayer.isPaused());
+    }
+
+    @Test
+    public void testResumeSong() {
+        musicPlayer.addSong("Imagine");
+        musicPlayer.resumeSong();
+        assertFalse(musicPlayer.isPaused());
+        assertFalse(musicPlayer.isPlaying());
+        try {
+            musicPlayer.playSong("Imagine");
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
+        musicPlayer.pauseSong();
+        musicPlayer.resumeSong();
+        assertFalse(musicPlayer.isPaused());
+        assertTrue(musicPlayer.isPlaying());
     }
 
     @Test

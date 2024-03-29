@@ -24,5 +24,6 @@
       {"path": "./data/Imagine.wav"},
       {"path": "./data/pizzarecipe.txt"}
     ]
-  }
+  },
+  {"name": "Sea Shell"}
 ]}

@@ -50,9 +50,11 @@ class JsonWriterTest {
             FiberSearch fiberSearch = new FiberSearch();
             MusicPlayer musicPlayer = new MusicPlayer();
             FileExplorer fileExplorer = new FileExplorer();
+            SeaShell seaShell = new SeaShell();
             home.addApplication(fiberSearch);
             home.addApplication(musicPlayer);
             home.addApplication(fileExplorer);
+            home.addApplication(seaShell);
 
             musicPlayer.addSong("Imagine");
             fileExplorer.addFile(new File("./data/Imagine.wav"));
@@ -68,12 +70,14 @@ class JsonWriterTest {
             fiberSearch = (FiberSearch) home.getAppList().get(0);
             musicPlayer = (MusicPlayer) home.getAppList().get(1);
             fileExplorer = (FileExplorer) home.getAppList().get(2);
-            assertEquals(3, home.getAppList().size());
+            seaShell = (SeaShell) home.getAppList().get(3);
+            assertEquals(4, home.getAppList().size());
             assertEquals("Fiber Search", fiberSearch.getName());
             assertEquals("Music Player", musicPlayer.getName());
             assertEquals("File Explorer", fileExplorer.getName());
+            assertEquals("Sea Shell", seaShell.getName());
 
-            assertEquals(2, fiberSearch.getWebpages().size());
+            assertEquals(3, fiberSearch.getWebpages().size());
             assertEquals(1, musicPlayer.getSongs().size());
             assertEquals(2, fileExplorer.getFiles().size());
 

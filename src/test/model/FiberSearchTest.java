@@ -20,17 +20,18 @@ public class FiberSearchTest {
     @Test
     public void testConstructor() {
         assertEquals("Fiber Search", fiberSearch.getName());
-        assertEquals(2, fiberSearch.getWebpages().size());
+        assertEquals(3, fiberSearch.getWebpages().size());
     }
 
     @Test
     public void testGetWebpages() {
         ArrayList<Webpage> pages = fiberSearch.getWebpages();
 
-        assertEquals(2, fiberSearch.getWebpages().size());
+        assertEquals(3, fiberSearch.getWebpages().size());
+    }
 
-        pages.get(0).setNumVisits(13);
-
-        assertEquals(1, fiberSearch.getWebpages().size());
+    @Test
+    public void testGetUrl() {
+        assertEquals("www.machinegallery.com", fiberSearch.getUrl());
     }
 }

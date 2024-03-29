@@ -16,36 +16,53 @@ public class MusicPlayer extends Application {
     private String currentSong;
     private AudioInputStream audio;
     private Clip clip;
-    private boolean playing = false;
+    private boolean playing;
+    private boolean paused;
 
     public MusicPlayer() {
         super("Music Player");
         songs = new HashMap<>();
+        playing = false;
+        paused = false;
+        currentSong = "";
     }
 
     // MODIFIES: this
-    // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays song at given pos
+    // EFFECTS: if no song playing, plays song. if song playing, stops current song and plays given song
     public void playSong(String name) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        if (playing) {
+//            if (playing) {
+//                clip.stop();
+//                playing = false;
+//            }
+        if (clip != null) {
             clip.stop();
-            playing = false;
         }
         audio = AudioSystem.getAudioInputStream(songs.get(name));
         clip = AudioSystem.getClip();
         clip.open(audio);
         clip.start();
         playing = true;
+
     }
 
-//    // EFFECTS: pauses song
-//    public void pauseSong() {
-//
-//    }
-//
-//    // EFFECTS: start song at given time point
-//    public void scrubSong(int time) {
-//
-//    }
+    // MODIFIES: this
+    // EFFECTS: pauses song
+    public void pauseSong() {
+        if (playing) {
+            clip.stop();
+            paused = true;
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: resumes song
+    public void resumeSong() {
+        if (paused) {
+            clip.start();
+            playing = true;
+            paused = false;
+        }
+    }
 
     // MODIFIES: this, fileExplorer
     // EFFECTS: adds song with given name to songs list
@@ -61,6 +78,10 @@ public class MusicPlayer extends Application {
 
     public boolean isPlaying() {
         return playing;
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     // EFFECTS: returns this as JSONObject

@@ -41,17 +41,19 @@ class JsonReaderTest {
         try {
             Home home = reader.read();
             ArrayList<Application> apps = home.getAppList();
-            assertEquals(3, apps.size());
+            assertEquals(4, apps.size());
 
             FiberSearch fiberSearch = (FiberSearch) home.getAppList().get(0);
             MusicPlayer musicPlayer = (MusicPlayer) home.getAppList().get(1);
             FileExplorer fileExplorer = (FileExplorer) home.getAppList().get(2);
+            SeaShell seaShell = (SeaShell) home.getAppList().get(3);
 
             assertEquals("Fiber Search", fiberSearch.getName());
             assertEquals("Music Player", musicPlayer.getName());
             assertEquals("File Explorer", fileExplorer.getName());
+            assertEquals("Sea Shell", seaShell.getName());
 
-            assertEquals(2, fiberSearch.getWebpages().size());
+            assertEquals(3, fiberSearch.getWebpages().size());
             assertEquals(1, musicPlayer.getSongs().size());
             assertEquals(2, fileExplorer.getFiles().size());
         } catch (IOException e) {

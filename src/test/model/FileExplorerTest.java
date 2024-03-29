@@ -41,4 +41,11 @@ public class FileExplorerTest {
             fail("Unexpected exception thrown");
         }
     }
+
+    @Test
+    public void testRecoverFiles() {
+        fileExplorer.recoverFiles();
+        assertEquals(1, fileExplorer.getFiles().size());
+        assertTrue(fileExplorer.getFiles().containsKey("BibleStudyMail"));
+    }
 }

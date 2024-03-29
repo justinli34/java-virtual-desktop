@@ -123,6 +123,26 @@ public class FiberSearchFrame extends AppFrame {
         pizzaPage.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = 3;
+        c.gridx = 0;
+        c.gridy = 1;
+
+        initPizzaText();
+        initRecipeLink();
+        initPizzaLogo();
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> returnToSearch());
+        c.gridwidth = 1;
+        c.gridx = 1;
+        c.gridy = 2;
+        pizzaPage.add(backButton, c);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes scroll pane with pizza text
+    public void initPizzaText() {
         JTextArea pizzaText = new JTextArea();
         JScrollPane scrollPane = new JScrollPane(pizzaText);
         pizzaText.setColumns(40);
@@ -135,19 +155,19 @@ public class FiberSearchFrame extends AppFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth = 3;
         c.gridx = 0;
         c.gridy = 1;
+
         pizzaPage.add(scrollPane, c);
+    }
 
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> returnToSearch());
-        c.gridwidth = 1;
-        c.gridx = 1;
-        c.gridy = 2;
-        pizzaPage.add(backButton, c);
-
+    // MODIFIES: this
+    // EFFECTS: initializes download recipe link
+    public void initRecipeLink() {
         JLabel recipeLink = new JLabel("<HTML><U>Download Recipe!</U></HTML>");
         recipeLink.setForeground(Color.BLUE.darker());
         recipeLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -158,9 +178,17 @@ public class FiberSearchFrame extends AppFrame {
                 downloadRecipe();
             }
         });
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridy = 2;
         c.gridx = 2;
         pizzaPage.add(recipeLink, c);
+    }
 
+    // MODIFIES: this
+    // EFFECTS: creates label with pizza imagine/logo
+    public void initPizzaLogo() {
         BufferedImage logo = null;
         try {
             logo = ImageIO.read(new File("./data/pizzalogo.png"));
@@ -169,6 +197,9 @@ public class FiberSearchFrame extends AppFrame {
         }
         Image scaledLogo = logo.getScaledInstance(150, 70, Image.SCALE_SMOOTH);
         JLabel picLabel = new JLabel(new ImageIcon(scaledLogo));
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 0;
         pizzaPage.add(picLabel, c);
@@ -201,13 +232,29 @@ public class FiberSearchFrame extends AppFrame {
         musicPage.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        initMusicText();
+        initSongLinks();
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> returnToSearch());
+        c.gridy = 4;
+        c.insets = new Insets(20, 0, 0, 0);
+        musicPage.add(backButton, c);
+    }
+
+    public void initMusicText() {
+        GridBagConstraints c = new GridBagConstraints();
+
         JLabel text = new JLabel("Welcome to John's Music Blog!");
-        c.gridwidth = 3;
         c.insets = new Insets(0, 0, 10, 0);
         musicPage.add(text, c);
         text = new JLabel("Here are some songs I've been listening to recently...");
         c.gridy = 1;
         musicPage.add(text, c);
+    }
+
+    public void initSongLinks() {
+        GridBagConstraints c = new GridBagConstraints();
 
         JLabel songLink = new JLabel("<HTML><U>John Lennon - Imagine</U></HTML>");
         songLink.setForeground(Color.BLUE.darker());
@@ -233,12 +280,6 @@ public class FiberSearchFrame extends AppFrame {
         });
         c.gridy = 3;
         musicPage.add(songLink, c);
-
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> returnToSearch());
-        c.gridy = 4;
-        c.insets = new Insets(20, 0, 0, 0);
-        musicPage.add(backButton, c);
     }
 
     // MODIFIES: musicPlayer
@@ -265,14 +306,6 @@ public class FiberSearchFrame extends AppFrame {
                 System.out.println("URL accessed");
             }
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: remove all initial components from frame
-    public void removeHome() {
-        getContentPane().remove(searchField);
-        getContentPane().remove(bookmarks);
-        getContentPane().remove(pizzaLink);
     }
 
     // MODIFIES: this
