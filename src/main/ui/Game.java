@@ -52,6 +52,7 @@ public class Game {
         runGame();
     }
 
+    // MODIFIES: this
     // EFFECTS: loads previously saved game
     public void loadGame() {
         try {

@@ -3,17 +3,17 @@
         "webpages": [
             {
                 "name": "Tony's Pizza",
-                "numVisits": 0,
+                "numVisits": 1,
                 "text": "We are thrilled to announce the upcoming grand opening of Tony's Pizza, your premier destination for authentic Italian cuisine delivered straight to your home!\nJoin us on March 10th for a culinary extravaganza, featuring special promotions, exclusive discounts, and a chance to win free pizza for a year!\nEmail us the code \"P1ZZ4\" for a free sample ahead of the big event!\nClick the link below for a printout of our most popular recipe!"
             },
             {
                 "name": "John's Music Blog",
-                "numVisits": 0,
+                "numVisits": 1,
                 "text": "Welcome to John's Music Blog! To download a song, type \"download\" and the name of the song you want.\n1. John Lennon - Imagine\n2. Michael Jackson - Billie Jean"
             },
             {
                 "name": "Best Tech Forum",
-                "numVisits": 0,
+                "numVisits": 1,
                 "text": "Demystifying SeaShell: Your Quick Guide\n\nRecently, readers of the blog have been asking about the hidden features of SeaShell. This short post will cover a few recently discovered commands.\n\n1. Recovering deleted files\nTo recover your deleted files, simply type \"ss recover\" and your files will reappear in your file explorer.\n\n2. Secret codes\nUsers have been reporting \"secret codes\" that can be entered into SeaShell with varying effects. We have yet to validate these claims. To try for yourself, type \"ss [code]\".\n\nStay tuned for more insights from BestTech. Happy exploring!"
             }
         ],

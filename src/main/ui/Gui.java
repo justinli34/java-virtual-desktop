@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -31,7 +32,15 @@ public class Gui extends JFrame implements ActionListener {
     public Gui() {
         super("ArkNet");
 
-        setupModel();
+        jsonWriter = new JsonWriter("./data/Game1");
+        jsonReader = new JsonReader("./data/Game1");
+
+        int n = JOptionPane.showConfirmDialog(this, "Load previous game?", "Load Game", JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            loadGame();
+        } else {
+            setupModel();
+        }
 
         JFrame.setDefaultLookAndFeelDecorated(true);
         setBounds(0, 0, 1920, 1080);
@@ -56,9 +65,6 @@ public class Gui extends JFrame implements ActionListener {
     // MODIFIES: this
     // EFFECTS: initializes apps
     protected void setupModel() {
-        jsonWriter = new JsonWriter("./data/Game1");
-        jsonReader = new JsonReader("./data/Game1");
-
         home = new Home();
         fiberSearch = new FiberSearch();
         musicPlayer = new MusicPlayer();
@@ -157,13 +163,42 @@ public class Gui extends JFrame implements ActionListener {
     protected void quit() {
         int n = JOptionPane.showConfirmDialog(this, "Save current progress?", "Quit", JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION) {
-            System.out.println("Game saved");
+            saveGame();
             System.exit(0);
         } else if (n == JOptionPane.NO_OPTION) {
             System.out.println("Game not saved");
             System.exit(0);
         } else {
             System.out.println("Game resumed");
+        }
+    }
+
+    // EFFECTS: saves current game
+    public void saveGame() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(home);
+            jsonWriter.close();
+            System.out.println("Game saved successfully");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save game");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads previously saved game
+    public void loadGame() {
+        try {
+            home = jsonReader.read();
+            fiberSearch = (FiberSearch) home.getAppList().get(0);
+            musicPlayer = (MusicPlayer) home.getAppList().get(1);
+            fileExplorer = (FileExplorer) home.getAppList().get(2);
+            seaShell = (SeaShell) home.getAppList().get(3);
+//            seaShell = new SeaShell();
+//            home.addApplication(seaShell);
+            System.out.println("Loaded game from previous save");
+        } catch (IOException e) {
+            System.out.println("Unable to read from file");
         }
     }
 

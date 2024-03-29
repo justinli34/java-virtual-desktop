@@ -63,16 +63,16 @@ public class MusicPlayerTest {
     public void testCheckStop() {
         musicPlayer.addSong("Imagine");
 
+        musicPlayer.checkStop();
         assertNull(musicPlayer.getClip());
+
         try {
             musicPlayer.playSong("Imagine");
         } catch (Exception e) {
             fail("Unexpected exception thrown");
         }
-
         musicPlayer.checkStop();
         assertFalse(musicPlayer.getClip().isActive());
-
     }
 
     @Test
