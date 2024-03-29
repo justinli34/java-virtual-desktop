@@ -36,6 +36,7 @@ public class MusicPlayerTest {
             fail("Unexpected exception thrown");
         }
         assertTrue(musicPlayer.isPlaying());
+//        assertTrue(musicPlayer.getClip().isActive());
     }
 
     @Test
@@ -59,9 +60,27 @@ public class MusicPlayerTest {
     }
 
     @Test
+    public void testCheckStop() {
+        musicPlayer.addSong("Imagine");
+
+        assertNull(musicPlayer.getClip());
+        try {
+            musicPlayer.playSong("Imagine");
+        } catch (Exception e) {
+            fail("Unexpected exception thrown");
+        }
+
+        musicPlayer.checkStop();
+        assertFalse(musicPlayer.getClip().isActive());
+
+    }
+
+    @Test
     public void testPauseSong() {
         musicPlayer.addSong("Imagine");
+        musicPlayer.pauseSong();
         assertFalse(musicPlayer.isPaused());
+        assertNull(musicPlayer.getClip());
         try {
             musicPlayer.playSong("Imagine");
         } catch (Exception e) {
@@ -69,12 +88,14 @@ public class MusicPlayerTest {
         }
         musicPlayer.pauseSong();
         assertTrue(musicPlayer.isPaused());
+        assertFalse(musicPlayer.getClip().isActive());
     }
 
     @Test
     public void testResumeSong() {
         musicPlayer.addSong("Imagine");
         musicPlayer.resumeSong();
+        assertNull(musicPlayer.getClip());
         assertFalse(musicPlayer.isPaused());
         assertFalse(musicPlayer.isPlaying());
         try {
@@ -86,6 +107,7 @@ public class MusicPlayerTest {
         musicPlayer.resumeSong();
         assertFalse(musicPlayer.isPaused());
         assertTrue(musicPlayer.isPlaying());
+//        assertTrue(musicPlayer.getClip().isActive());
     }
 
     @Test

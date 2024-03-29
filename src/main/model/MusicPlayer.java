@@ -34,15 +34,21 @@ public class MusicPlayer extends Application {
 //                clip.stop();
 //                playing = false;
 //            }
-        if (clip != null) {
-            clip.stop();
-        }
+        checkStop();
         audio = AudioSystem.getAudioInputStream(songs.get(name));
         clip = AudioSystem.getClip();
         clip.open(audio);
         clip.start();
         playing = true;
 
+    }
+
+    // MODIFIES: this
+    // EFFECTS: checks if clip is currently playing and stops if it is
+    public void checkStop() {
+        if (clip != null) {
+            clip.stop();
+        }
     }
 
     // MODIFIES: this
@@ -82,6 +88,10 @@ public class MusicPlayer extends Application {
 
     public boolean isPaused() {
         return paused;
+    }
+
+    public Clip getClip() {
+        return clip;
     }
 
     // EFFECTS: returns this as JSONObject
