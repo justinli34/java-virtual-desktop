@@ -40,7 +40,7 @@ public class MusicPlayer extends Application {
         clip.open(audio);
         clip.start();
         playing = true;
-
+        EventLog.getInstance().logEvent(new Event(name + " started playing"));
     }
 
     // MODIFIES: this
@@ -57,6 +57,7 @@ public class MusicPlayer extends Application {
         if (playing) {
             clip.stop();
             paused = true;
+            EventLog.getInstance().logEvent(new Event("Song was paused"));
         }
     }
 
@@ -67,6 +68,7 @@ public class MusicPlayer extends Application {
             clip.start();
             playing = true;
             paused = false;
+            EventLog.getInstance().logEvent(new Event("Song was resumed"));
         }
     }
 
@@ -76,6 +78,7 @@ public class MusicPlayer extends Application {
         String sep = System.getProperty("file.separator");
         File songFile = new File(System.getProperty("user.dir") + sep + "data" + sep + song + ".wav");
         songs.put(song, songFile);
+        EventLog.getInstance().logEvent(new Event(song + " was added to Music Player"));
     }
 
     public Map<String, File> getSongs() {

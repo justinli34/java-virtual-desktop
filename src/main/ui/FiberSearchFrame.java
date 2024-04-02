@@ -343,6 +343,8 @@ public class FiberSearchFrame extends AppFrame {
         repaint();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes machine gallery page
     public void initMachineGalleryPage() {
         BufferedImage bg = null;
         try {

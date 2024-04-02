@@ -26,6 +26,7 @@ public class FileExplorer extends Application {
     // EFFECTS: adds give file to files
     public void addFile(File f) {
         files.put(f.getName(), f);
+        EventLog.getInstance().logEvent(new Event(f.getName() + " was downloaded"));
     }
 
     // EFFECTS: returns files
@@ -42,6 +43,7 @@ public class FileExplorer extends Application {
     // MODIFIES: this
     public void recoverFiles() {
         addFile(new File("./data/BibleStudyMail"));
+        EventLog.getInstance().logEvent(new Event("Files were recovered"));
     }
 
     // EFFECTS: returns this as JSONObject

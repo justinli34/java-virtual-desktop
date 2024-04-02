@@ -3,7 +3,7 @@
         "webpages": [
             {
                 "name": "Tony's Pizza",
-                "numVisits": 1,
+                "numVisits": 2,
                 "text": "We are thrilled to announce the upcoming grand opening of Tony's Pizza, your premier destination for authentic Italian cuisine delivered straight to your home!\nJoin us on March 10th for a culinary extravaganza, featuring special promotions, exclusive discounts, and a chance to win free pizza for a year!\nEmail us the code \"P1ZZ4\" for a free sample ahead of the big event!\nClick the link below for a printout of our most popular recipe!"
             },
             {
@@ -20,16 +20,12 @@
         "name": "Fiber Search"
     },
     {
-        "songs": [
-            {"songName": "BillieJean"},
-            {"songName": "Faraon"},
-            {"songName": "Imagine"}
-        ],
+        "songs": [{"songName": "BillieJean"}],
         "name": "Music Player"
     },
     {
         "name": "File Explorer",
-        "files": []
+        "files": [{"path": "./data/pizzarecipe.txt"}]
     },
     {"name": "Sea Shell"}
 ]}

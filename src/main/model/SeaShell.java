@@ -6,6 +6,7 @@ import org.json.JSONObject;
 public class SeaShell extends Application {
     private final String code = "5243817791";
 
+    // EFFECTS: creates sea shell app with name "Sea Shell"
     public SeaShell() {
         super("Sea Shell");
     }

@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -164,9 +165,10 @@ public class Gui extends JFrame implements ActionListener {
         int n = JOptionPane.showConfirmDialog(this, "Save current progress?", "Quit", JOptionPane.YES_NO_OPTION);
         if (n == JOptionPane.YES_OPTION) {
             saveGame();
+            printLog();
             System.exit(0);
         } else if (n == JOptionPane.NO_OPTION) {
-            System.out.println("Game not saved");
+            printLog();
             System.exit(0);
         } else {
             System.out.println("Game resumed");
@@ -199,6 +201,13 @@ public class Gui extends JFrame implements ActionListener {
             System.out.println("Loaded game from previous save");
         } catch (IOException e) {
             System.out.println("Unable to read from file");
+        }
+    }
+
+    // EFFECTS: prints all events in event log
+    public void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e.toString());
         }
     }
 
