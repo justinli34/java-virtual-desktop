@@ -42,3 +42,21 @@ This game is inspired by games like _Hypnospace Outlaw_, _Citizen Sleeper_, and 
 - You can locate my visual component by going to Fiber Search and going to Tony's Pizza.
 - You can save the state of my application by closing the application. There will be a dialog popup asking if you want to save.
 - You can reload the state of my application by opening the application. There will be a dialog popup asking if you want to load.
+
+## Phase 4: Task 2
+Tue Apr 02 14:46:14 PDT 2024  
+Faraon was added to Music Player  
+Tue Apr 02 14:46:14 PDT 2024  
+BillieJean was added to Music Player  
+Tue Apr 02 14:46:17 PDT 2024  
+pizzarecipe.txt was downloaded  
+Tue Apr 02 14:46:26 PDT 2024  
+BillieJean started playing  
+Tue Apr 02 14:46:28 PDT 2024  
+Faraon started playing  
+Tue Apr 02 14:46:30 PDT 2024  
+Song was paused  
+Tue Apr 02 14:46:31 PDT 2024  
+Song was resumed  
+Tue Apr 02 14:46:32 PDT 2024  
+Song was paused  
