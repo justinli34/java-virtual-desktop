@@ -60,3 +60,13 @@ Tue Apr 02 14:46:31 PDT 2024
 Song was resumed  
 Tue Apr 02 14:46:32 PDT 2024  
 Song was paused  
+
+## Phase 4: Task 3
+In my current design, there is high coupling between the GUI and model because the GUI instantiates all the applications
+to be able to work with them, but also instantiates a Home class which contains all the apps. To refactor this to reduce coupling,
+I could remove the Home class entirely and work with the apps as unique classes. However, since I originally intended for there
+to be apps that could be downloaded by the user, deleting the Home class, which is a container for the apps, may not be a good idea.
+Instead, a better solution could be to change the appList field in Home to be a map with app names as keys and apps as values. 
+Then, everytime an app is added in the model, a button for that app will be added in the ui. Whenever an app is opened through the ui,
+I would get the app from the appList, and pass it as an argument to a method in the ui that handles interaction with that app specifically.
+This way, only the methods that care about a specific application will have to know about it, instead of the entire ui.
