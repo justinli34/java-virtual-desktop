@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 // Represents a writer that writes JSON representation of Home to file
-// Code is based on JsonSerializationDemo from CPSC 210
 public class JsonWriter {
     private PrintWriter writer;
     private String destination;

@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 // Represents a reader that reads Home from JSON data stored in file
-// Code is based on JsonSerializationDemo from CPSC 210
 public class JsonReader {
     private String source;
 

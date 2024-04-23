@@ -10,7 +10,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-// Code is based on JsonSerializationDemo from CPSC 210
 class JsonWriterTest {
 
     @Test
